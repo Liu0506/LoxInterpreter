@@ -1,0 +1,9 @@
+// 函数
+/** 函数方法 */
+fun abc() {
+    let str = "he\\llo \n world \"哈哈\"";
+    let a = 0 || 1;
+    let b = 0 && 1;
+    let d = `hello`;
+    print(language);
+}
