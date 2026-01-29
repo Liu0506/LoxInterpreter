@@ -205,6 +205,7 @@ class Scanner {
      * @return 字符
      */
     private char peek() {
+        if (current >= source.length()) return '\0';
         return source.charAt(current);
     }
 
@@ -401,6 +402,6 @@ class Scanner {
             }
         }
 
-        System.out.println(source.substring(start, current));
+        // System.out.println(source.substring(start, current));
     }
 }

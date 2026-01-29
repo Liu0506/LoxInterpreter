@@ -2,7 +2,9 @@ package com.cheng.lox;
 
 class Token {
     final TokenType type;
+    /** 原始文本 */
     final String lexeme;
+    /** 字面量 */
     final Object literal;
     final int line;
 

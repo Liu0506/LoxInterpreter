@@ -2,7 +2,7 @@
   <configuration default="false" name="Lox 解析文件" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.cheng.lox.Lox" />
     <module name="LoxInterpreter" />
-    <option name="PROGRAM_PARAMETERS" value="./examples/jlox/demo.lox" />
+    <option name="PROGRAM_PARAMETERS" value="./examples/jlox/demo02.lox" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.cheng.lox.*" />
