@@ -12,6 +12,7 @@ import static com.cheng.lox.TokenType.*;
 class Parser {
     private final List<Token> tokens;
     private int current = 0;
+
     /**
      * 构造方法
      *
@@ -35,7 +36,26 @@ class Parser {
      * @return 解析后的表达式抽象语法树
      */
     private Expr expression() {
-        return equality();
+        return ternary();
+    }
+
+    /**
+     * 解析三元表达式
+     * 语法规则：ternary → equality ( "?" expression ":" expression )? ;
+     *
+     * @return 三元表达式的抽象语法树
+     */
+    private Expr ternary() {
+        Expr expr = equality();
+
+        if (match(QUESTION)) {
+            Expr exprIfTrue = expression();
+            consume(COLON, "Expect ':' after then branch.");
+            Expr exprIfFalse = expression();
+            expr = new Expr.Ternary(expr, exprIfTrue, exprIfFalse);
+        }
+
+        return expr;
     }
 
     /**
@@ -174,6 +194,35 @@ class Parser {
     private ParseError error(Token token, String message) {
         Lox.error(token, message);
         return new ParseError();
+    }
+
+    /**
+     * 同步解析器状态
+     * 在遇到语法错误后，跳过当前语句，继续解析下一个语句
+     * 通过寻找语句的边界（分号或语句起始关键字）来实现错误恢复
+     */
+    private void synchronize() {
+        advance();
+
+        while (!isAtEnd()) {
+            if (previous().type == SEMICOLON) {
+                return;
+            }
+
+            switch (peek().type) {
+                case CLASS:
+                case FUN:
+                case VAR:
+                case FOR:
+                case IF:
+                case WHILE:
+                case PRINT:
+                case RETURN:
+                    return;
+            }
+
+            advance();
+        }
     }
 
     /**

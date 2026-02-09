@@ -34,12 +34,13 @@ LoxInterpreter/
 
 - **递归下降解析器**：将 Token 序列转换为抽象语法树
 - **解析顺序**（从低优先级到高优先级）：
-  1. `expression()` → `equality()` - 解析相等性表达式 (==, !=)
-  2. `equality()` → `comparison()` - 解析比较表达式 (>, >=, <, <=)
-  3. `comparison()` → `term()` - 解析项表达式（加减法 +, -）
-  4. `term()` → `factor()` - 解析因子表达式（乘除法 *, /）
-  5. `factor()` → `unary()` - 解析一元表达式（负号 -, 逻辑非 !）
-  6. `unary()` → `primary()` - 解析基本表达式（字面量、括号等）
+  1. `expression()` → `ternary()` - 解析三元表达式 (condition ? then : else)
+  2. `ternary()` → `equality()` - 解析相等性表达式 (==, !=)
+  3. `equality()` → `comparison()` - 解析比较表达式 (>, >=, <, <=)
+  4. `comparison()` → `term()` - 解析项表达式（加减法 +, -）
+  5. `term()` → `factor()` - 解析因子表达式（乘除法 *, /）
+  6. `factor()` → `unary()` - 解析一元表达式（负号 -, 逻辑非 !）
+  7. `unary()` → `primary()` - 解析基本表达式（字面量、括号等）
 - **错误处理**：提供语法错误检测和报告
 - **辅助方法**：Token 匹配、检查、前进等功能
 
@@ -52,6 +53,7 @@ LoxInterpreter/
   - Binary：二元表达式（如 1 + 2）
   - Grouping：分组表达式（如 (1 + 2)）
   - Literal：字面量表达式（如数字、字符串）
+  - Ternary：三元表达式（如 a ? b : c）
 
 ### 解释器核心
 

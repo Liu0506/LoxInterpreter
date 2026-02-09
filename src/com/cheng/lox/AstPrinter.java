@@ -79,6 +79,17 @@ class AstPrinter implements Expr.Visitor<String> {
     }
 
     /**
+     * 访问三元表达式
+     *
+     * @param expr 三元表达式对象
+     * @return 格式化后的字符串表示
+     */
+    @Override
+    public String visitTernaryExpr(Expr.Ternary expr) {
+        return parenthesize("ternary", expr.condition, expr.exprIfTrue, expr.exprIfFalse);
+    }
+
+    /**
      * 将表达式和名称包装在括号中
      *
      * @param name  操作符或分组名称
